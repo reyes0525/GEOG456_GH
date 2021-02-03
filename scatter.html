@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <div id="myDiv2"></div>
+    <script>
+
+
+var wakeTravel = {
+  "year": ["2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019"],
+  "minutes": [23.8635, 24.0752, 23.6342, 23.5481, 23.7007, 23.862, 24.1035, 24.4507, 24.9043, 25.0735, 25.4557]
+};
+        var trace1 = {
+  x: wakeTravel.year,
+  y: wakeTravel.minutes,
+  mode: 'markers',
+  type: 'scatter',
+}
+
+
+
+
+var data = [trace1];
+
+Plotly.newPlot('myDiv', data);
+data[0].type = "bar"
+Plotly.newPlot('myDiv2', data);
+    </script>
+</body>
+</html>
