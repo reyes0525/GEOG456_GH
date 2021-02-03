@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scatter Plot</title>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+</head>
+<body>
+    <div id="myDiv"></div>
+    <script> src=".data/temp.json"</script>
+    <script>
+        var trace1 = {
+  x: wakeTravel.year,
+  y: wakeTravel.minutes,
+  mode: 'markers',
+  type: 'bar',
+  markers: {
+    color: 'rgb(16, 32, 77)
+  }
+};
+
+
+
+var data = [trace1];
+
+Plotly.newPlot('myDiv', data);
+    </script>
+</body>
+</html>
