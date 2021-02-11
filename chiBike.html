@@ -22,29 +22,25 @@
         text-align: center;
       }
       .box {
-        float: left;
         background: lightgrey;
         border: 1px solid black;
         border-radius: 5px;
         color: black;
         padding: 10px;
-        margin: 10px;
-        margin-left: 250px;
-        font-size: 18px;
+        margin: 25px auto;
+        font-size: 20px;
         min-height: 30px;
-        max-width: 50%;
+        max-width: 35%;
         text-align: center;
       }
       footer {
-        clear: left;
         padding: 10px;
         text-align: center;
         font-size: 20px;
-        margin: 10px;
+        margin: 10px auto;
         color: white;
         background-color: grey;
         border: 1px solid black;
-        border-radius: 5px;
       }
       .header {
         font-family: Arial, Helvetica, sans-serif;
@@ -109,10 +105,14 @@
 
       var layout = {
         xaxis: {
+          title: 'Date (Jan. 2019 to Dec. 2020)',
           fixedrange: true,
-          range: ["2019-01-02", "2020-12-26"]
+          range: ["2019-01-02", "2020-12-26"],
+          rangeslider: {},
+          label: ["x Label"]
         },
         yaxis: {
+          title: 'Number of Trips',
           fixedrange: true,
           range: ["0","27000"]
         }  
@@ -153,10 +153,10 @@
     <button onclick="myFunction()"> Yeet! </button>
    </div> 
 
-   <div class="box">     
+   <!--<div class="box">     
     <label for="slider"> Slide to pick a range of dates: </label>
     <input type="range" min="0" max="727" value="2019-01-02" class="slider" oninput="mySlice(this.value)">
-   </div> 
+   </div>--> 
 
   <footer>Thank you for visting my webpage!</footer>
 </body>
