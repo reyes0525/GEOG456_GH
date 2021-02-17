@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNC Cherry Trees</title>
+    <link rel="stylesheet"href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="crossorigin=""></script>
+    
+</head>
+<body>
+    <div id="mapid"></div>
+        <style>
+            #mapid{width: 900px; height: 600px;}
+        </style>
+        <script src="./data/flowering_cherries_4326.js"></script>
+        <script>
+            
+            var map = L.map('mapid').setView([35.907, -79.05], 15);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'})
+                .addTo(map);
+
+            var uncIcon= L.icon({
+                iconUrl:'https://banner2.cleanpng.com/20180619/ojl/kisspng-cherry-blossom-pink-m-st-au-150-min-v-unc-nr-ad-environnement-fond-transparent-5b28ad872c2a78.7493449615293925191809.jpg',
+                iconSize:[30,30], 
+                popupAnchor:[0,0]
+            });
+            
+            var customPopup = "UNC Cherry Trees <img src='https://media-cdn.tripadvisor.com/media/photo-s/12/a5/b6/d8/cherry-tree-in-bloom.jpg'width='250px'/>";    
+
+            L.geoJSON(cherryTrees, {
+            pointToLayer: function (feature, latlng) {
+            return L.marker(latlng, {icon: uncIcon});}})
+            .bindPopup(customPopup)
+            .addTo(map);
+            
+        </script>
+</body>
+</html>
