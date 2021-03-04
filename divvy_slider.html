@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Divvy Slider</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="./geojson/divvy_trips2_sm.js"></script>
+</head>
+<style>
+    #map{
+        width: 100%;
+        height: 500px;
+    }
+</style>
+<body>
+    <h3 id="daTime">Day in January</h3>
+    <input type="range" name="day" min="1" max="31" oninput="moveSlider(this.value)">
+    <button onclick='geojson.setStyle({color:getRandomColor()})'>Change Color!</button>
+
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map').setView([41.91, -87.71], 11);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {   
+        }).addTo(map);
+
+        var myStyle = {
+            radius: 350,
+            fillColor: "#000",
+            color: getColor(),
+            weight: 3,
+            opacity: 1,
+            fillOpacity: .05
+        };
+
+        // This doesn't work!! :(
+        function myStyle(feature) {
+            return {
+                radius: 350,
+                fillColor: "#000",
+                //color: getColor(feature.properties.day),
+                weight: 3,
+                opacity: 1,
+                fillOpacity: .05
+            }
+        };
+
+        function getColor(d) {
+            return d < myCurrentSelectionDay ? "red" :
+                        "green";
+        }
+
+        var geojson = L.geoJSON(trips, {
+            pointToLayer: function (feature, latlng) {
+                return L.circle(latlng, myStyle);
+            }
+        }).addTo(map);      
+        
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        var myCurrentSelectionDay = 1;
+        function moveSlider(value) {
+            document.getElementById('daTime').innerHTML = 'Day in January: ' + value
+            myCurrentSelectionDay = value
+            geojson.resetStyle()
+        }
+
+        moveSlider(myCurrentSelectionDay)
+
+    </script>
+</body>
+</html>
